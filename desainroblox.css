@@ -17,13 +17,23 @@ body {
 }
 
 .ROBLOX {
+    margin-bottom: 50px;
     background: linear-gradient(90deg, black, white, black);
     background-size: 300%;
+    color: transparent;
     font-size: 50px;
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
-    animation: slideNav 10s linear infinite;
+    animation: slideNav 5s linear infinite;
+}
+
+@keyframes slideNav {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 250%;
+    }
 }
 
 .nav-bar {
