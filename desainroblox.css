@@ -1,0 +1,162 @@
+@import url(https://fonts.google.com/specimen/Oswald);
+
+
+body {
+    background: black;
+    background-size: 300%;
+    margin: 0;
+    padding: 10px;
+    text-align: justify;
+    line-height: 1.6;
+    font-family: 'Oswald', sans-serif;
+}
+
+
+
+.header {
+    background-color: #000000;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    border-bottom: white solid 1px;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.ROBLOX {
+    margin-bottom: 50px;
+    background: linear-gradient(90deg, black, white, black);
+    background-size: 300%;
+    color: transparent;
+    font-size: 50px;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: slideNav 10s linear infinite;
+}
+
+@keyframes slideNav {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 250%;
+    }
+}
+
+.nav-item {
+    display: inline;
+    font-size: 15px;
+    color: white;
+    padding: 5px;
+    margin: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-item:hover {
+    background-color: #333333;
+    color: white;
+}
+
+.nav-syarat{
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    padding: 1px;
+    margin: 50px;
+}
+
+.paragraft-syarat{
+    color: white;
+}
+
+.nav-deskripsi{
+    color: rgb(0, 0, 0);
+}
+
+.section-isi{
+    margin-top: 50px;
+    color: black;
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    transition: all ease 0.5s;
+}
+
+
+.section-isi:hover{
+    transform: scale(1.05);
+}
+
+.watermak{
+    text-align: center;
+    margin-top: 150px;
+}
+
+.social-media{
+    display: inline;
+    
+}
+
+.div-button{
+    background-color: white;
+    margin: 100px;
+    border-radius: 50px;
+    text-decoration: none;
+    justify-content: center;
+    align-self: center;
+    cursor: pointer;
+    padding: 0;
+    display: fe;
+    transition: all 0.5s ease;
+}
+
+.div-button:hover{
+    background-color: black;
+}
+
+.nav-button{
+    margin-bottom: 50px;
+    background: linear-gradient(90deg, black, white, black);
+    color: transparent;
+    font-size: 50px;
+    -webkit-background-clip: text;
+    background-clip: text;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: slideNav 10s linear infinite;
+    transition: all 0.5s ease;
+}
+
+.nav-button:hover{
+    color: #ffffff;
+}
+
+@keyframes slideNav {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 250%;
+    }
+}
+
+.image-grid{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 10px;
+        padding: 10px;
+}
+
+.image-grid img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
