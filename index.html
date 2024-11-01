@@ -14,19 +14,19 @@
                     <li class="nav-item"><a href="#tentang" class="nav-item">Tentang</a></li>
                     <li class="nav-item"><a href="#Syarat" class="nav-item">Syarat</a></li>
                     <li class="nav-item"><a href="#member" class="nav-item">Member</a></li>
-                    <li class="nav-item"><a href="#kenangan" class="nav-item">kenangan</a></li>
+                    <li class="nav-item"><a href="#kenangan" class="nav-item">kenangan "Maintace"</a></li>
                 </ul>
         </nav>
     </header>
 
     <section>
         <div class="div-syarat" id="tentang">
-            <h2 class="nav-syarat">Pengertian</h2>
+            <h2 class="nav-syarat">Apa itu Roblox club ?</h2>
                 <p style="color: white;">ROBLOX CLUB adalah sebuah klub di platform Roblox yang menawarkan pengalaman bermain yang unik dan penuh misteri. Klub ini dirancang untuk para pemain yang menyukai suasana gelap dan elemen kehitaman, memberikan nuansa yang berbeda dari klub atau komunitas Roblox pada umumnya. Dengan anggota yang memiliki keunikan masing-masing, ROBLOX CLUB menjadi tempat berkumpulnya orang-orang dengan minat yang sama terhadap hal-hal misterius dan penuh teka-teki. Di sini, para anggota dapat menjelajahi dunia virtual yang penuh tantangan, berkolaborasi dalam petualangan yang seru, serta menikmati atmosfer klub yang serba gelap dan memikat.</p>
         </div>
     </section>
     <section>
-        <div class="div-syarat">
+        <div class="div-syarat" id="Syarat">
             <h2 class="nav-syarat">Syarat join</h2>
                 <li class="paragraft-syarat">Harus punya ktp</li>
                 <li class="paragraft-syarat">Harus 17+ boleh masuk member</li>
@@ -70,12 +70,18 @@
 
     <div class="div-button">
         <ul class="nav-button">
-            <p class="ROBLOX-button">Play Roblox</p>
+            <p class="ROBLOX-button" id="playButton">Play Roblox</p>
         </ul>
     </div>
 
-    <footer>
+    <script>
+        document.getElementById("playButton").addEventListener("click", function() {
+            window.location.href = "roblox://";
+        });
+    </script>
 
+
+    <footer>
         <p class="watermak" style="color: white;">Copyright &copy; 2024 ROBLOX Club. All rights reserved.</p>
         <div class="social-media">
             <a href="#"><img src="facebook-logo-1-2.png" style="height: 50px;" alt="Facebook"></a>
