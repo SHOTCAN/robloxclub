@@ -57,7 +57,7 @@ body {
 
 .nav-item a:hover {
     background-color: #555;
-    color: white;
+    color: red
 }
 
 .div-syarat {
@@ -140,7 +140,6 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 10px;
-    width: 90%;
     max-width: 1200px;
 }
 
@@ -172,7 +171,7 @@ body {
     }
 
     .div-button {
-        width: 90%;
+        width: 100%;
         max-width: 300px;
         padding: 15px;
     }
