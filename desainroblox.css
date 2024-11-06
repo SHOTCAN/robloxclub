@@ -109,27 +109,6 @@ body {
     transform: scale(1.1);
 }
 
-.div-button {
-    background-color: white;
-    color: black;
-    padding: 5px;
-    border-radius: 25px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    cursor: pointer;
-    max-width: 200px;
-    font-size: 24px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.div-button:hover {
-    background-color: black;
-    color: white;
-}
-
 .nav-button {
     font-size: 20px;
     display: flex;
@@ -176,6 +155,60 @@ body {
 
 .grid-item:hover::after {
     background: rgba(159, 64, 64, 0.3); /* Efek lebih gelap saat hover */
+}
+
+
+.div-button {
+    background-color: #000000;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 25px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    cursor: pointer;
+    max-width: 300px;
+    font-size: 26px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.div-button:hover {
+    background-color: #ff0000;
+    transform: scale(1.05);
+}
+
+.div-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+}
+
+.div-button:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.div-button:hover p {
+    animation: textGlow 0.5s forwards;
+}
+
+@keyframes textGlow {
+    0% {
+        text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #ffffff;
+    }
+    100% {
+        text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+    }
 }
 
 @media (max-width: 768px) {
