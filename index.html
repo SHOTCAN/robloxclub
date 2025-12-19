@@ -1,108 +1,1003 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROBLOX CLUB</title>
+    <meta name="description"
+        content="ROBLOX CLUB - Komunitas gaming Roblox terbaik Indonesia dengan ribuan anggota aktif. Bergabunglah bersama kami!">
+    <meta name="keywords" content="Roblox, Gaming Club, Komunitas Roblox, Gaming Indonesia, Roblox Indonesia">
+    <meta name="author" content="ROBLOX CLUB">
+    <title>ROBLOX CLUB | Komunitas Gaming Premium Indonesia</title>
     <link rel="stylesheet" href="desainroblox.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
-    <header class="header">
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader">
+            <div class="loader-cube">
+                <div class="cube-face front">R</div>
+                <div class="cube-face back">X</div>
+                <div class="cube-face right">B</div>
+                <div class="cube-face left">L</div>
+                <div class="cube-face top">O</div>
+                <div class="cube-face bottom">X</div>
+            </div>
+            <p class="loader-text">Loading<span class="loading-dots"></span></p>
+        </div>
+    </div>
+
+    <!-- Cursor Trail -->
+    <div class="cursor-trail" id="cursorTrail"></div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Voice Command Button -->
+    <button class="voice-command-btn" id="voiceCommandBtn" aria-label="Voice Command">
+        <i class="fas fa-microphone"></i>
+        <span class="voice-ripple"></span>
+    </button>
+
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrixCanvas" class="matrix-rain"></canvas>
+
+    <!-- Neural Network Background -->
+    <canvas id="neuralCanvas" class="neural-bg"></canvas>
+
+    <!-- Magnetic Cursor -->
+    <div class="magnetic-cursor" id="magneticCursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+
+    <!-- AI Chatbot -->
+    <div class="ai-chatbot" id="aiChatbot">
+        <div class="chatbot-toggle" id="chatbotToggle">
+            <div class="chatbot-icon">
+                <i class="fas fa-robot"></i>
+                <span class="ai-pulse"></span>
+            </div>
+            <span class="chatbot-label">AI Assistant</span>
+        </div>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div class="chatbot-avatar">
+                    <i class="fas fa-robot"></i>
+                    <span class="status-dot online"></span>
+                </div>
+                <div class="chatbot-info">
+                    <h4>ROBO AI</h4>
+                    <span class="typing-indicator" id="typingIndicator">Online • Ready to help</span>
+                </div>
+                <button class="chatbot-close" id="chatbotClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="chat-message bot">
+                    <div class="message-avatar"><i class="fas fa-robot"></i></div>
+                    <div class="message-content">
+                        <p>Halo! 👋 Aku <strong>ROBO</strong>, AI Assistant Roblox Club!</p>
+                        <p>Aku bisa bantu kamu dengan:</p>
+                        <div class="quick-actions">
+                            <button class="quick-btn" data-action="games">🎮 Game Recommendations</button>
+                            <button class="quick-btn" data-action="events">📅 Upcoming Events</button>
+                            <button class="quick-btn" data-action="join">🚀 How to Join</button>
+                            <button class="quick-btn" data-action="members">👥 Meet Members</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatInput" placeholder="Ketik pesan atau tanya sesuatu..." autocomplete="off">
+                <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Buttons -->
+    <div class="fab-container" id="fabContainer">
+        <button class="fab-main" id="fabMain">
+            <i class="fas fa-bolt"></i>
+        </button>
+        <div class="fab-actions">
+            <button class="fab-action" data-tooltip="Quick Play" onclick="window.location.href='roblox://'">
+                <i class="fas fa-play"></i>
+            </button>
+            <button class="fab-action" data-tooltip="Discord" onclick="window.open('https://discord.gg/robloxclub')">
+                <i class="fab fa-discord"></i>
+            </button>
+            <button class="fab-action" data-tooltip="Random Game" id="randomGameBtn">
+                <i class="fas fa-dice"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Glitch Text Effect Overlay -->
+    <div class="glitch-overlay" id="glitchOverlay"></div>
+
+    <!-- Sound Toggle -->
+    <button class="sound-toggle" id="soundToggle" aria-label="Toggle Sound">
+        <i class="fas fa-volume-up"></i>
+    </button>
+
+    <!-- Navbar -->
+    <header class="header" id="navbar">
         <nav class="container-navbar">
             <h1 class="nav-judul"><span class="ROBLOX">ROBLOX</span>.CLUB</h1>
-                <ul class="nav-bar">
-                    <li class="nav-item"><a href="#tentang" class="nav-item">Tentang</a></li>
-                    <li class="nav-item"><a href="#Syarat" class="nav-item">Syarat</a></li>
-                    <li class="nav-item"><a href="#member" class="nav-item">Member</a></li>
-                    <li class="nav-item"><a href="#kenangan" class="nav-item">kenangan</a></li>
-                </ul>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle Menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <ul class="nav-bar" id="navBar">
+                <li class="nav-item"><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item"><a href="#tentang"><i class="fas fa-info-circle"></i> Tentang</a></li>
+                <li class="nav-item"><a href="#stats"><i class="fas fa-chart-bar"></i> Stats</a></li>
+                <li class="nav-item"><a href="#games"><i class="fas fa-gamepad"></i> Games</a></li>
+                <li class="nav-item"><a href="#events"><i class="fas fa-calendar-star"></i> Events</a></li>
+                <li class="nav-item"><a href="#member"><i class="fas fa-users"></i> Member</a></li>
+                <li class="nav-item"><a href="#leaderboard"><i class="fas fa-trophy"></i> Top</a></li>
+                <li class="nav-item"><a href="#kenangan"><i class="fas fa-camera"></i> Gallery</a></li>
+                <li class="nav-item"><a href="#join"><i class="fas fa-user-plus"></i> Join</a></li>
+            </ul>
         </nav>
     </header>
 
-    <section>
-        <div class="div-syarat" id="tentang">
-            <h2 class="nav-syarat">Apa itu Roblox club ?</h2>
-                <p style="color: white;">ROBLOX CLUB adalah sebuah klub di platform Roblox yang menawarkan pengalaman bermain yang unik dan penuh misteri. Klub ini dirancang untuk para pemain yang menyukai suasana gelap dan elemen kehitaman, memberikan nuansa yang berbeda dari klub atau komunitas Roblox pada umumnya. Dengan anggota yang memiliki keunikan masing-masing, ROBLOX CLUB menjadi tempat berkumpulnya orang-orang dengan minat yang sama terhadap hal-hal misterius dan penuh teka-teki. Di sini, para anggota dapat menjelajahi dunia virtual yang penuh tantangan, berkolaborasi dalam petualangan yang seru, serta menikmati atmosfer klub yang serba gelap dan memikat.</p>
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="floating-elements">
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+        </div>
+        <div class="hero-content">
+            <span class="hero-badge">✨ Komunitas Gaming #1 Indonesia</span>
+            <h1 class="hero-title">
+                <span class="gradient-text">ROBLOX</span>
+                <span class="glow-text">CLUB</span>
+            </h1>
+            <p class="hero-description">
+                Bergabunglah dengan komunitas gaming eksklusif kami! Temukan teman baru, petualangan seru, turnamen
+                epic, dan pengalaman bermain yang tak terlupakan!
+            </p>
+            <div class="hero-buttons">
+                <a href="roblox://" class="btn-primary pulse-btn" id="playButton">
+                    <i class="fas fa-gamepad"></i> Play Roblox
+                </a>
+                <a href="#member" class="btn-secondary">
+                    <i class="fas fa-users"></i> Lihat Member
+                </a>
+                <a href="#join" class="btn-glow">
+                    <i class="fas fa-rocket"></i> Join Sekarang
+                </a>
+            </div>
+            <div class="hero-scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <span>Scroll Down</span>
+            </div>
         </div>
     </section>
-    <section>
-        <div class="div-syarat" id="Syarat">
-            <h2 class="nav-syarat">Syarat join</h2>
-                <li class="paragraft-syarat">Harus punya ktp</li>
-                <li class="paragraft-syarat">Harus 17+ boleh masuk member</li>
-                <li class="paragraft-syarat">Harus punya surat tanah</li>
-                <li class="paragraft-syarat">Harus berwarna hitam</li>
-                <li class="paragraft-syarat">Harus berbatang</li>
-                <li class="paragraft-syarat">HArus suka bembeng</li>
-                <li class="paragraft-syarat">Harus main ROBLOX (wajib)</li>
+
+    <!-- Stats Counter Section -->
+    <section class="stats-section" id="stats">
+        <div class="stats-container">
+            <div class="stat-card reveal">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-number" data-target="500">0</div>
+                <div class="stat-label">Active Members</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                <div class="stat-number" data-target="10000">0</div>
+                <div class="stat-label">Hours Played</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-icon"><i class="fas fa-gamepad"></i></div>
+                <div class="stat-number" data-target="150">0</div>
+                <div class="stat-label">Games Explored</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-icon"><i class="fas fa-trophy"></i></div>
+                <div class="stat-number" data-target="75">0</div>
+                <div class="stat-label">Events Completed</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-icon"><i class="fas fa-medal"></i></div>
+                <div class="stat-number" data-target="250">0</div>
+                <div class="stat-label">Achievements</div>
+            </div>
         </div>
     </section>
 
-    <section id="member" class="section-isi">
-        <h3 class="nav-member">Akbar</h3>
-        <img class="Akbar-img" src="WhatsApp Image 2024-10-27 at 15.50.31_b948a4e5.jpg" style="height: 200px;" alt="Akbar">
-            <p class="nav-deskripsi">"Akbar adalah seorang pria berusia 17 tahun yang telah lama terpesona oleh dunia anime dan cosplay. Meskipun berasal dari kota kecil, ia memiliki impian besar untuk menjiwai karakter-karakter pahlawan dari anime yang ia cintai. Satu hal yang membuat Akbar menonjol di dunia cosplay adalah kecintaannya pada karakter-karakter dengan kulit lebih gelap. Hal ini bukan hanya tentang penampilan, tetapi juga tentang keberaniannya untuk tampil beda dan menonjol dengan cara yang unik. Akbar menjadi inspirasi bagi teman-temannya karena keteguhannya dalam kecintaan pada dunia cosplay dengan penuh percaya di."</p>
+    <!-- Tentang Section -->
+    <section class="section" id="tentang">
+        <div class="div-syarat reveal">
+            <h2 class="nav-syarat"><i class="fas fa-info-circle"></i> Apa itu Roblox Club?</h2>
+            <p style="color: rgba(255,255,255,0.7); line-height: 1.8;">
+                ROBLOX CLUB adalah komunitas gaming premium terbesar di Indonesia yang menghubungkan para pemain Roblox
+                dari seluruh nusantara. Kami menawarkan pengalaman bermain yang unik dengan suasana yang misterius dan
+                penuh petualangan. Klub ini dirancang untuk para pemain yang mencari lebih dari sekadar bermain game -
+                kami adalah keluarga yang saling mendukung, berkompetisi, dan bertumbuh bersama. Dengan ratusan member
+                aktif, puluhan event mingguan, dan komunitas Discord yang ramai, ROBLOX CLUB adalah rumah kedua bagi
+                para gamer sejati!
+            </p>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Safe Community</h4>
+                    <p>Lingkungan yang aman dan positif</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <h4>Daily Events</h4>
+                    <p>Event seru setiap hari</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-gift"></i>
+                    <h4>Exclusive Rewards</h4>
+                    <p>Hadiah eksklusif untuk member</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-headset"></i>
+                    <h4>24/7 Support</h4>
+                    <p>Admin selalu siap membantu</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="member" class="section-isi">
-        <h3 class="nav-member">Baldyas</h3>
-        <img class="Akbar-img" src="WhatsApp Image 2024-10-27 at 19.22.19_2785bcb3.jpg" style="height: 200px;" alt="Akbar">
-            <p class="nav-deskripsi">"Baldyas adalah seorang remaja yang bersekolah di SMK, penuh semangat dan percaya diri. Kulitnya yang agak gelap sering menjadi ciri khasnya, yang ia sandang dengan bangga. Dia memiliki kepribadian yang humoris dan suka membuat teman-temannya tertawa, bahkan sering menjadi pusat perhatian di antara teman-teman sekelasnya. Di SMK, Baldyas mengambil jurusan yang dia sukai, dan ia dikenal sebagai siswa yang rajin serta berdedikasi. Meski terkadang santai, Baldyas sebenarnya punya ambisi besar untuk masa depannya. Dia punya cita-cita yang tinggi dan terus berusaha mencapai mimpinya, meskipun dengan caranya sendiri yang santai dan penuh canda. Selain itu, Baldyas juga aktif dalam kegiatan ekstrakurikuler, terutama yang melibatkan olahraga atau kegiatan di luar ruangan. Baginya, sekolah bukan hanya soal belajar di kelas, tetapi juga membangun pertemanan dan menikmati masa remaja sebaik mungkin. Baldyas memang anak yang spesial di antara teman-temannya; dia selalu membawa semangat positif ke mana pun dia pergi."</p>
+    <!-- Games Showcase Section -->
+    <section class="section games-section" id="games">
+        <div class="section-header">
+            <h2 class="section-title"><i class="fas fa-gamepad"></i> Games Favorit Kami</h2>
+            <p class="section-subtitle">Game-game Roblox yang sering kami mainkan bersama</p>
+        </div>
+        <div class="games-carousel-container">
+            <button class="carousel-btn prev-btn" id="gamesPrev"><i class="fas fa-chevron-left"></i></button>
+            <div class="games-carousel" id="gamesCarousel">
+                <div class="game-card">
+                    <div class="game-image" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <h3>Adopt Me!</h3>
+                    <p>Pet simulation & trading</p>
+                    <span class="game-players"><i class="fas fa-user"></i> 500K+ Playing</span>
+                </div>
+                <div class="game-card">
+                    <div class="game-image" style="background: linear-gradient(135deg, #4834d4, #686de0);">
+                        <i class="fas fa-skull-crossbones"></i>
+                    </div>
+                    <h3>Murder Mystery 2</h3>
+                    <p>Survival & mystery</p>
+                    <span class="game-players"><i class="fas fa-user"></i> 100K+ Playing</span>
+                </div>
+                <div class="game-card">
+                    <div class="game-image" style="background: linear-gradient(135deg, #22a6b3, #7ed6df);">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Bloxburg</h3>
+                    <p>Life simulation & building</p>
+                    <span class="game-players"><i class="fas fa-user"></i> 200K+ Playing</span>
+                </div>
+                <div class="game-card">
+                    <div class="game-image" style="background: linear-gradient(135deg, #f0932b, #ffbe76);">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Jailbreak</h3>
+                    <p>Cops & robbers action</p>
+                    <span class="game-players"><i class="fas fa-user"></i> 150K+ Playing</span>
+                </div>
+                <div class="game-card">
+                    <div class="game-image" style="background: linear-gradient(135deg, #6c5ce7, #a29bfe);">
+                        <i class="fas fa-dragon"></i>
+                    </div>
+                    <h3>Blox Fruits</h3>
+                    <p>Anime adventure & fighting</p>
+                    <span class="game-players"><i class="fas fa-user"></i> 400K+ Playing</span>
+                </div>
+                <div class="game-card">
+                    <div class="game-image" style="background: linear-gradient(135deg, #00b894, #55efc4);">
+                        <i class="fas fa-tower-observation"></i>
+                    </div>
+                    <h3>Tower Defense</h3>
+                    <p>Strategy & teamwork</p>
+                    <span class="game-players"><i class="fas fa-user"></i> 80K+ Playing</span>
+                </div>
+                <div class="game-card">
+                    <div class="game-image" style="background: linear-gradient(135deg, #fd79a8, #e84393);">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Royale High</h3>
+                    <p>Fantasy school roleplay</p>
+                    <span class="game-players"><i class="fas fa-user"></i> 300K+ Playing</span>
+                </div>
+                <div class="game-card">
+                    <div class="game-image" style="background: linear-gradient(135deg, #636e72, #2d3436);">
+                        <i class="fas fa-ghost"></i>
+                    </div>
+                    <h3>Doors</h3>
+                    <p>Horror & survival</p>
+                    <span class="game-players"><i class="fas fa-user"></i> 120K+ Playing</span>
+                </div>
+            </div>
+            <button class="carousel-btn next-btn" id="gamesNext"><i class="fas fa-chevron-right"></i></button>
+        </div>
     </section>
 
-    <section id="member" class="section-isi">
-        <h3 class="nav-member">Royan</h3>
-        <img class="Akbar-img" src="WhatsApp Image 2024-10-27 at 19.55.26_0ba30d4d.jpg" style="height: 200px;" alt="Akbar">
-            <p class="nav-deskripsi">"Royan adalah seorang pemuda yang memiliki kemampuan unik ia dapat menyatu dengan langit. Saat bahagia, tubuhnya berubah menjadi putih seperti awan, memungkinkannya terbang tinggi. Meskipun berbeda dari teman-temannya, Royan merasa kesepian karena tidak ada yang bisa merasakan pengalamannya. Ia penuh rasa ingin tahu dan merindukan hubungan dengan orang lain. Dengan tekad, ia berusaha berbagi keindahan langit kepada teman-temannya, menjadikan kemampuannya sebagai jembatan untuk membangun ikatan yang lebih kuat."</p>
+    <!-- Events Section -->
+    <section class="section events-section" id="events">
+        <div class="section-header">
+            <h2 class="section-title"><i class="fas fa-calendar-star"></i> Upcoming Events</h2>
+            <p class="section-subtitle">Jangan lewatkan event-event seru kami!</p>
+        </div>
+
+        <!-- Featured Event with Countdown -->
+        <div class="featured-event reveal">
+            <div class="event-badge">🔥 EVENT TERBESAR!</div>
+            <h3>ROBLOX CLUB CHAMPIONSHIP 2024</h3>
+            <p>Turnamen tahunan dengan hadiah jutaan Robux!</p>
+            <div class="countdown" id="mainCountdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Hari</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Jam</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Menit</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Detik</span>
+                </div>
+            </div>
+            <a href="#join" class="btn-primary">Daftar Sekarang</a>
+        </div>
+
+        <!-- Events Grid -->
+        <div class="events-grid">
+            <div class="event-card reveal">
+                <div class="event-date">
+                    <span class="day">25</span>
+                    <span class="month">DEC</span>
+                </div>
+                <div class="event-content">
+                    <span class="event-tag">🎄 Special</span>
+                    <h4>Christmas Party</h4>
+                    <p>Rayakan Natal bersama di Bloxburg!</p>
+                    <span class="event-time"><i class="fas fa-clock"></i> 19:00 WIB</span>
+                </div>
+            </div>
+            <div class="event-card reveal">
+                <div class="event-date">
+                    <span class="day">31</span>
+                    <span class="month">DEC</span>
+                </div>
+                <div class="event-content">
+                    <span class="event-tag">🎆 Special</span>
+                    <h4>New Year Countdown</h4>
+                    <p>Menghitung mundur tahun baru bersama!</p>
+                    <span class="event-time"><i class="fas fa-clock"></i> 23:00 WIB</span>
+                </div>
+            </div>
+            <div class="event-card reveal">
+                <div class="event-date">
+                    <span class="day">05</span>
+                    <span class="month">JAN</span>
+                </div>
+                <div class="event-content">
+                    <span class="event-tag">⚔️ Tournament</span>
+                    <h4>Murder Mystery Tournament</h4>
+                    <p>Siapa yang paling jago?</p>
+                    <span class="event-time"><i class="fas fa-clock"></i> 20:00 WIB</span>
+                </div>
+            </div>
+            <div class="event-card reveal">
+                <div class="event-date">
+                    <span class="day">10</span>
+                    <span class="month">JAN</span>
+                </div>
+                <div class="event-content">
+                    <span class="event-tag">🏆 Competition</span>
+                    <h4>Blox Fruits PVP</h4>
+                    <p>Adu kekuatan buah iblis!</p>
+                    <span class="event-time"><i class="fas fa-clock"></i> 19:30 WIB</span>
+                </div>
+            </div>
+            <div class="event-card reveal">
+                <div class="event-date">
+                    <span class="day">15</span>
+                    <span class="month">JAN</span>
+                </div>
+                <div class="event-content">
+                    <span class="event-tag">🏠 Building</span>
+                    <h4>Bloxburg Build Contest</h4>
+                    <p>Kompetisi membangun rumah terbaik!</p>
+                    <span class="event-time"><i class="fas fa-clock"></i> 14:00 WIB</span>
+                </div>
+            </div>
+            <div class="event-card reveal">
+                <div class="event-date">
+                    <span class="day">20</span>
+                    <span class="month">JAN</span>
+                </div>
+                <div class="event-content">
+                    <span class="event-tag">👻 Horror</span>
+                    <h4>Doors Speedrun Race</h4>
+                    <p>Siapa tercepat clear Door 100?</p>
+                    <span class="event-time"><i class="fas fa-clock"></i> 21:00 WIB</span>
+                </div>
+            </div>
+            <div class="event-card reveal">
+                <div class="event-date">
+                    <span class="day">25</span>
+                    <span class="month">JAN</span>
+                </div>
+                <div class="event-content">
+                    <span class="event-tag">🎭 Roleplay</span>
+                    <h4>Royale High Fashion Show</h4>
+                    <p>Kontes outfit terkeren!</p>
+                    <span class="event-time"><i class="fas fa-clock"></i> 16:00 WIB</span>
+                </div>
+            </div>
+            <div class="event-card reveal">
+                <div class="event-date">
+                    <span class="day">30</span>
+                    <span class="month">JAN</span>
+                </div>
+                <div class="event-content">
+                    <span class="event-tag">🚗 Racing</span>
+                    <h4>Jailbreak Heist Challenge</h4>
+                    <p>Tim mana yang bisa rampok paling banyak?</p>
+                    <span class="event-time"><i class="fas fa-clock"></i> 20:00 WIB</span>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="member" class="section-isi">
-        <h3 class="nav-member">Nabil</h3>
-        <img class="Akbar-img" src="WhatsApp Image 2024-10-27 at 20.01.48_89876812.jpg" style="height: 200px;" alt="Akbar">
-            <p class="nav-deskripsi">"Nabil adalah seorang pemuda dengan hobi unik ia suka menikmati bembeng, yaitu sejenis batang cokelat atau biskuit yang renyah. Nabil tidak hanya menikmatinya sendiri, tetapi juga senang membagikannya kepada orang lain. Ia percaya bahwa berbagi bembeng dapat membawa kebahagiaan dan menciptakan momen-momen menyenangkan bersama teman-temannya. Nabil dikenal sebagai sosok yang ceria dan murah hati, selalu siap dengan bembeng untuk dibagikan kepada siapa pun yang ingin merasakannya."</p>
+    <!-- Member Section -->
+    <section class="section" id="member">
+        <div class="section-header">
+            <h2 class="section-title"><i class="fas fa-users"></i> Our Elite Members</h2>
+            <p class="section-subtitle">Kenali anggota-anggota legendaris dari ROBLOX CLUB</p>
+        </div>
+
+        <!-- Member 1: Akbar -->
+        <div class="section-isi reveal-left">
+            <img class="Akbar-img" src="WhatsApp Image 2024-10-27 at 15.50.31_b948a4e5.jpg" alt="Akbar">
+            <div class="member-content">
+                <div class="member-badges">
+                    <span class="badge founder"><i class="fas fa-crown"></i> Founder</span>
+                    <span class="badge pro"><i class="fas fa-star"></i> Pro Player</span>
+                </div>
+                <h3 class="nav-member"><i class="fas fa-user-ninja"></i> Akbar</h3>
+                <p class="nav-deskripsi">"Akbar adalah seorang pria berusia 17 tahun yang telah lama terpesona oleh
+                    dunia anime dan cosplay. Meskipun berasal dari kota kecil, ia memiliki impian besar untuk menjiwai
+                    karakter-karakter pahlawan dari anime yang ia cintai. Satu hal yang membuat Akbar menonjol di dunia
+                    cosplay adalah kecintaannya pada karakter-karakter dengan kulit lebih gelap."</p>
+                <div class="member-stats">
+                    <div class="mini-stat"><i class="fas fa-gamepad"></i> 500+ Games</div>
+                    <div class="mini-stat"><i class="fas fa-clock"></i> 2000+ Hours</div>
+                    <div class="mini-stat"><i class="fas fa-trophy"></i> #1 Rank</div>
+                </div>
+                <div class="member-social">
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Member 2: Baldyas -->
+        <div class="section-isi reveal-right">
+            <img class="Akbar-img" src="WhatsApp Image 2024-10-27 at 19.22.19_2785bcb3.jpg" alt="Baldyas">
+            <div class="member-content">
+                <div class="member-badges">
+                    <span class="badge admin"><i class="fas fa-shield-alt"></i> Admin</span>
+                    <span class="badge builder"><i class="fas fa-hammer"></i> Builder</span>
+                </div>
+                <h3 class="nav-member"><i class="fas fa-user-graduate"></i> Baldyas</h3>
+                <p class="nav-deskripsi">"Baldyas adalah seorang remaja yang bersekolah di SMK, penuh semangat dan
+                    percaya diri. Kulitnya yang agak gelap sering menjadi ciri khasnya, yang ia sandang dengan bangga.
+                    Dia memiliki kepribadian yang humoris dan suka membuat teman-temannya tertawa."</p>
+                <div class="member-stats">
+                    <div class="mini-stat"><i class="fas fa-gamepad"></i> 350+ Games</div>
+                    <div class="mini-stat"><i class="fas fa-clock"></i> 1500+ Hours</div>
+                    <div class="mini-stat"><i class="fas fa-trophy"></i> #2 Rank</div>
+                </div>
+                <div class="member-social">
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Member 3: Royan -->
+        <div class="section-isi reveal-left">
+            <img class="Akbar-img" src="WhatsApp Image 2024-10-27 at 19.55.26_0ba30d4d.jpg" alt="Royan">
+            <div class="member-content">
+                <div class="member-badges">
+                    <span class="badge mod"><i class="fas fa-gavel"></i> Moderator</span>
+                    <span class="badge speedrun"><i class="fas fa-bolt"></i> Speedrunner</span>
+                </div>
+                <h3 class="nav-member"><i class="fas fa-cloud"></i> Royan</h3>
+                <p class="nav-deskripsi">"Royan adalah seorang pemuda yang memiliki kemampuan unik - ia dapat menyatu
+                    dengan langit. Saat bahagia, tubuhnya berubah menjadi putih seperti awan, memungkinkannya terbang
+                    tinggi. Royan penuh rasa ingin tahu dan merindukan hubungan dengan orang lain."</p>
+                <div class="member-stats">
+                    <div class="mini-stat"><i class="fas fa-gamepad"></i> 400+ Games</div>
+                    <div class="mini-stat"><i class="fas fa-clock"></i> 1800+ Hours</div>
+                    <div class="mini-stat"><i class="fas fa-trophy"></i> #3 Rank</div>
+                </div>
+                <div class="member-social">
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-twitch"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Member 4: Nabil -->
+        <div class="section-isi reveal-right">
+            <img class="Akbar-img" src="WhatsApp Image 2024-10-27 at 20.01.48_89876812.jpg" alt="Nabil">
+            <div class="member-content">
+                <div class="member-badges">
+                    <span class="badge member"><i class="fas fa-user"></i> Elite Member</span>
+                    <span class="badge trader"><i class="fas fa-exchange-alt"></i> Trader</span>
+                </div>
+                <h3 class="nav-member"><i class="fas fa-cookie-bite"></i> Nabil</h3>
+                <p class="nav-deskripsi">"Nabil adalah seorang pemuda dengan hobi unik - ia suka menikmati bembeng,
+                    yaitu sejenis batang cokelat atau biskuit yang renyah. Nabil tidak hanya menikmatinya sendiri,
+                    tetapi juga senang membagikannya kepada orang lain. Ia percaya bahwa berbagi bembeng dapat membawa
+                    kebahagiaan."</p>
+                <div class="member-stats">
+                    <div class="mini-stat"><i class="fas fa-gamepad"></i> 300+ Games</div>
+                    <div class="mini-stat"><i class="fas fa-clock"></i> 1200+ Hours</div>
+                    <div class="mini-stat"><i class="fas fa-trophy"></i> #4 Rank</div>
+                </div>
+                <div class="member-social">
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Member 5: Rafi -->
+        <div class="section-isi reveal-left">
+            <img class="Akbar-img" src="WhatsApp Image 2024-10-27 at 20.05.51_7b1aaecb.jpg" alt="Rafi">
+            <div class="member-content">
+                <div class="member-badges">
+                    <span class="badge member"><i class="fas fa-user"></i> Elite Member</span>
+                    <span class="badge addict"><i class="fas fa-fire"></i> Roblox Addict</span>
+                </div>
+                <h3 class="nav-member"><i class="fas fa-gamepad"></i> Rafi</h3>
+                <p class="nav-deskripsi">"Rafi adalah seorang penggemar berat permainan Roblox. Ia menghabiskan banyak
+                    waktu bermain game tersebut hingga menciptakan ketagihan yang mendalam. Saking seringnya bermain,
+                    Rafi sampai mengabaikan aktivitas lain dan menghabiskan waktu berjam-jam di depan layar."</p>
+                <div class="member-stats">
+                    <div class="mini-stat"><i class="fas fa-gamepad"></i> 450+ Games</div>
+                    <div class="mini-stat"><i class="fas fa-clock"></i> 3000+ Hours</div>
+                    <div class="mini-stat"><i class="fas fa-trophy"></i> #5 Rank</div>
+                </div>
+                <div class="member-social">
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="member" class="section-isi">
-        <h3 class="nav-member">Rafi</h3>
-        <img class="Akbar-img" src="WhatsApp Image 2024-10-27 at 20.05.51_7b1aaecb.jpg" style="height: 200px;" alt="Akbar">
-            <p class="nav-deskripsi">"Rafi adalah seorang penggemar berat permainan Roblox. Ia menghabiskan banyak waktu bermain game tersebut hingga menciptakan ketagihan yang mendalam. Saking seringnya bermain, Rafi sampai mengabaikan aktivitas lain dan menghabiskan waktu berjam-jam di depan layar. Ketertarikan Rafi terhadap Roblox membuatnya sangat akrab dengan berbagai karakter, permainan, dan komunitas di dalam game. Teman-temannya sering menggoda Rafi karena dedikasinya yang tinggi, bahkan sampai menganggapnya "menghitam" karena seringnya berlama-lama di depan komputer."</p>
+    <!-- Leaderboard Section -->
+    <section class="section leaderboard-section" id="leaderboard">
+        <div class="section-header">
+            <h2 class="section-title"><i class="fas fa-trophy"></i> Top Players</h2>
+            <p class="section-subtitle">Member dengan pencapaian tertinggi</p>
+        </div>
+        <div class="leaderboard-container reveal">
+            <div class="leaderboard-item rank-1">
+                <div class="rank-badge"><i class="fas fa-crown"></i> 1</div>
+                <img src="WhatsApp Image 2024-10-27 at 15.50.31_b948a4e5.jpg" alt="Akbar" class="leaderboard-avatar">
+                <div class="leaderboard-info">
+                    <h4>Akbar</h4>
+                    <p>Founder & Pro Player</p>
+                </div>
+                <div class="leaderboard-score">
+                    <span class="score">99,500</span>
+                    <span class="label">XP</span>
+                </div>
+            </div>
+            <div class="leaderboard-item rank-2">
+                <div class="rank-badge">2</div>
+                <img src="WhatsApp Image 2024-10-27 at 19.22.19_2785bcb3.jpg" alt="Baldyas" class="leaderboard-avatar">
+                <div class="leaderboard-info">
+                    <h4>Baldyas</h4>
+                    <p>Admin & Builder</p>
+                </div>
+                <div class="leaderboard-score">
+                    <span class="score">87,200</span>
+                    <span class="label">XP</span>
+                </div>
+            </div>
+            <div class="leaderboard-item rank-3">
+                <div class="rank-badge">3</div>
+                <img src="WhatsApp Image 2024-10-27 at 19.55.26_0ba30d4d.jpg" alt="Royan" class="leaderboard-avatar">
+                <div class="leaderboard-info">
+                    <h4>Royan</h4>
+                    <p>Moderator & Speedrunner</p>
+                </div>
+                <div class="leaderboard-score">
+                    <span class="score">75,800</span>
+                    <span class="label">XP</span>
+                </div>
+            </div>
+            <div class="leaderboard-item">
+                <div class="rank-badge">4</div>
+                <img src="WhatsApp Image 2024-10-27 at 20.05.51_7b1aaecb.jpg" alt="Rafi" class="leaderboard-avatar">
+                <div class="leaderboard-info">
+                    <h4>Rafi</h4>
+                    <p>Roblox Addict</p>
+                </div>
+                <div class="leaderboard-score">
+                    <span class="score">68,400</span>
+                    <span class="label">XP</span>
+                </div>
+            </div>
+            <div class="leaderboard-item">
+                <div class="rank-badge">5</div>
+                <img src="WhatsApp Image 2024-10-27 at 20.01.48_89876812.jpg" alt="Nabil" class="leaderboard-avatar">
+                <div class="leaderboard-info">
+                    <h4>Nabil</h4>
+                    <p>Trader & Collector</p>
+                </div>
+                <div class="leaderboard-score">
+                    <span class="score">52,100</span>
+                    <span class="label">XP</span>
+                </div>
+            </div>
+        </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section class="section testimonials-section">
+        <div class="section-header">
+            <h2 class="section-title"><i class="fas fa-quote-left"></i> Testimonials</h2>
+            <p class="section-subtitle">Apa kata member tentang kami</p>
+        </div>
+        <div class="testimonials-slider reveal">
+            <div class="testimonial-card active">
+                <div class="testimonial-content">
+                    <p>"Roblox Club adalah keluarga kedua saya! Di sini saya menemukan teman-teman yang seru dan event
+                        yang selalu bikin nagih. Highly recommended!"</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="WhatsApp Image 2024-10-27 at 15.50.31_b948a4e5.jpg" alt="Akbar">
+                    <div>
+                        <h4>Akbar</h4>
+                        <span>Founder</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>"Gila sih, event-eventnya seru banget! Setiap minggu ada aja yang baru. Admin-adminnya juga ramah
+                        dan helpful!"</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="WhatsApp Image 2024-10-27 at 19.22.19_2785bcb3.jpg" alt="Baldyas">
+                    <div>
+                        <h4>Baldyas</h4>
+                        <span>Admin</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>"Awalnya cuma iseng join, eh malah ketagihan! Komunitasnya positif banget, nggak ada toxic sama
+                        sekali."</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="WhatsApp Image 2024-10-27 at 19.55.26_0ba30d4d.jpg" alt="Royan">
+                    <div>
+                        <h4>Royan</h4>
+                        <span>Moderator</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+        </div>
+    </section>
+
+    <!-- Play Button -->
     <div class="div-button">
-        <p class="ROBLOX-button" id="playButton">Play Roblox</p>
+        <p class="ROBLOX-button" id="playButtonMain">
+            <i class="fas fa-play"></i> Play Roblox
+        </p>
     </div>
 
-    <section class="background-image-grid">
-        <h1 class="text-image-grid">Kenangan</h1>    
-        <div class="image-grid" id="kenangan">
-            <div class="grid-item"><img src="IMG_20240605_132015-min.jpg" alt="Image 1"></div>
-            <div class="grid-item"><img src="IMG_20240806_091644-min.jpg" alt="Image 2"></div>
-            <div class="grid-item"><img src="IMG_20240929_103311-min.jpg" alt="Image 3"></div>
-            <div class="grid-item"><img src="IMG_20241013_220950-min.jpg" alt="Image 4"></div>
-            <div class="grid-item"><img src="IMG20240713184936-min.jpg" alt="Image 5"></div>
-            <div class="grid-item"><img src="IMG20240713193426-min.jpg" alt="Image 6"></div>
-            <div class="grid-item"><img src="IMG20240505165859-min.jpg" alt="Image 7"></div>
-            <div class="grid-item"><img src="IMG20240624185220-min.jpg" alt="Image 8"></div>
-            <div class="grid-item"><img src="IMG20240624204245-min.jpg" alt="Image 9"></div>
-            <div class="grid-item"><img src="IMG20240711121707-min.jpg" alt="Image 10"></div>
-            <div class="grid-item"><img src="IMG20240811165554-min.jpg" alt="Image 11"></div>
-            <div class="grid-item"><img src="IMG20240831165435-min.jpg" alt="Image 12"></div>
-            <div class="grid-item"><img src="IMG20240928082556-min.jpg" alt="Image 13"></div>
-            <div class="grid-item"><img src="IMG20241005111436-min.jpg" alt="Image 14"></div>
-            <div class="grid-item"><img src="IMG20241005171442-min.jpg" alt="Image 15"></div> 
+    <!-- Gallery Section -->
+    <section class="background-image-grid" id="kenangan">
+        <h1 class="text-image-grid"><i class="fas fa-camera-retro"></i> Kenangan</h1>
+
+        <!-- Gallery Filter -->
+        <div class="gallery-filter">
+            <button class="filter-btn active" data-filter="all">Semua</button>
+            <button class="filter-btn" data-filter="events">Events</button>
+            <button class="filter-btn" data-filter="gaming">Gaming</button>
+            <button class="filter-btn" data-filter="hangout">Hangout</button>
+        </div>
+
+        <div class="image-grid">
+            <div class="grid-item reveal" data-category="events"><img src="IMG_20240605_132015-min.jpg"
+                    alt="Kenangan 1"></div>
+            <div class="grid-item reveal" data-category="gaming"><img src="IMG_20240806_091644-min.jpg"
+                    alt="Kenangan 2"></div>
+            <div class="grid-item reveal" data-category="hangout"><img src="IMG_20240929_103311-min.jpg"
+                    alt="Kenangan 3"></div>
+            <div class="grid-item reveal" data-category="events"><img src="IMG_20241013_220950-min.jpg"
+                    alt="Kenangan 4"></div>
+            <div class="grid-item reveal" data-category="gaming"><img src="IMG20240713184936-min.jpg" alt="Kenangan 5">
+            </div>
+            <div class="grid-item reveal" data-category="hangout"><img src="IMG20240713193426-min.jpg" alt="Kenangan 6">
+            </div>
+            <div class="grid-item reveal" data-category="events"><img src="IMG20240505165859-min.jpg" alt="Kenangan 7">
+            </div>
+            <div class="grid-item reveal" data-category="gaming"><img src="IMG20240624185220-min.jpg" alt="Kenangan 8">
+            </div>
+            <div class="grid-item reveal" data-category="hangout"><img src="IMG20240624204245-min.jpg" alt="Kenangan 9">
+            </div>
+            <div class="grid-item reveal" data-category="events"><img src="IMG20240711121707-min.jpg" alt="Kenangan 10">
+            </div>
+            <div class="grid-item reveal" data-category="gaming"><img src="IMG20240811165554-min.jpg" alt="Kenangan 11">
+            </div>
+            <div class="grid-item reveal" data-category="hangout"><img src="IMG20240831165435-min.jpg"
+                    alt="Kenangan 12"></div>
+            <div class="grid-item reveal" data-category="events"><img src="IMG20240928082556-min.jpg" alt="Kenangan 13">
+            </div>
+            <div class="grid-item reveal" data-category="gaming"><img src="IMG20241005111436-min.jpg" alt="Kenangan 14">
+            </div>
+            <div class="grid-item reveal" data-category="hangout"><img src="IMG20241005171442-min.jpg"
+                    alt="Kenangan 15"></div>
         </div>
     </section>
 
-    <footer>
-        <p class="watermak" style="color: white;">Copyright &copy; 2024 ROBLOX Club. All rights reserved.</p>
-        <div class="social-media">
-            <a href="#"><img src="facebook-logo-1-2.png" style="height: 50px;" alt="Facebook"></a>
-            <a href="#"><img src="Instagram_logo_2016.svg.png" style="height: 50px;" alt="Instagram"></a>
-            <a href="#"><img src="twitter-logo-1.png" style="height: 50px;" alt="Twitter"></a>
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <button class="lightbox-nav prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
+        <img src="" alt="Lightbox Image" id="lightboxImg">
+        <button class="lightbox-nav next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
+        <div class="lightbox-counter">
+            <span id="currentImg">1</span> / <span id="totalImg">15</span>
         </div>
-        <a href="#"><img src="7604589.png" style="height: 50px;" alt="Back to top"></a>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="section faq-section" id="faq">
+        <div class="section-header">
+            <h2 class="section-title"><i class="fas fa-question-circle"></i> FAQ</h2>
+            <p class="section-subtitle">Pertanyaan yang sering ditanyakan</p>
+        </div>
+        <div class="faq-container reveal">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Bagaimana cara join Roblox Club?</span>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Kamu bisa join dengan mengisi form di bawah atau langsung join Discord server kami! Setelah itu
+                        admin akan memverifikasi dan memberikan akses ke channel eksklusif.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Apakah ada biaya untuk bergabung?</span>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Tidak! Roblox Club sepenuhnya GRATIS. Kami adalah komunitas yang dibuat oleh gamers untuk gamers.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Apakah ada syarat khusus untuk join?</span>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Syarat utama adalah harus punya akun Roblox dan berusia minimal 13 tahun. Selain itu, kamu harus
+                        sopan dan tidak toxic!</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Bagaimana cara ikut event?</span>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Setelah menjadi member, kamu akan mendapat notifikasi di Discord setiap ada event. Tinggal klik
+                        react untuk daftar!</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Apakah ada hadiah untuk member aktif?</span>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Tentu! Member yang aktif berpartisipasi di event dan membantu komunitas bisa mendapatkan hadiah
+                        berupa Robux, rank khusus, dan merchandise eksklusif!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Form Section -->
+    <section class="section join-section" id="join">
+        <div class="section-header">
+            <h2 class="section-title"><i class="fas fa-user-plus"></i> Join Roblox Club</h2>
+            <p class="section-subtitle">Daftar sekarang dan jadilah bagian dari keluarga kami!</p>
+        </div>
+        <div class="join-container reveal">
+            <div class="join-info">
+                <h3><i class="fas fa-gift"></i> Keuntungan Member</h3>
+                <ul>
+                    <li><i class="fas fa-check"></i> Akses ke 75+ event per bulan</li>
+                    <li><i class="fas fa-check"></i> Komunitas Discord eksklusif</li>
+                    <li><i class="fas fa-check"></i> Giveaway Robux mingguan</li>
+                    <li><i class="fas fa-check"></i> Private server gratis</li>
+                    <li><i class="fas fa-check"></i> Mentoring dari pro players</li>
+                    <li><i class="fas fa-check"></i> Rank & badge khusus</li>
+                </ul>
+
+                <!-- Discord Widget -->
+                <div class="discord-widget">
+                    <div class="discord-header">
+                        <i class="fab fa-discord"></i>
+                        <span>Discord Server</span>
+                    </div>
+                    <div class="discord-info">
+                        <div class="discord-stat">
+                            <span class="discord-count">523</span>
+                            <span class="discord-label">Online</span>
+                        </div>
+                        <div class="discord-stat">
+                            <span class="discord-count">2,847</span>
+                            <span class="discord-label">Members</span>
+                        </div>
+                    </div>
+                    <a href="https://discord.gg/robloxclub" class="discord-join-btn" target="_blank">
+                        <i class="fab fa-discord"></i> Join Discord
+                    </a>
+                </div>
+            </div>
+            <form class="join-form" id="joinForm">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Nama Lengkap</label>
+                    <input type="text" id="name" name="name" required placeholder="Masukkan nama lengkap">
+                    <span class="error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="robloxUsername"><i class="fas fa-gamepad"></i> Username Roblox</label>
+                    <input type="text" id="robloxUsername" name="robloxUsername" required
+                        placeholder="Masukkan username Roblox">
+                    <span class="error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Masukkan email aktif">
+                    <span class="error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="age"><i class="fas fa-birthday-cake"></i> Umur</label>
+                    <input type="number" id="age" name="age" required min="13" max="99" placeholder="Minimal 13 tahun">
+                    <span class="error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="favoriteGame"><i class="fas fa-heart"></i> Game Favorit</label>
+                    <select id="favoriteGame" name="favoriteGame" required>
+                        <option value="">Pilih game favorit</option>
+                        <option value="adopt-me">Adopt Me!</option>
+                        <option value="blox-fruits">Blox Fruits</option>
+                        <option value="murder-mystery">Murder Mystery 2</option>
+                        <option value="bloxburg">Bloxburg</option>
+                        <option value="jailbreak">Jailbreak</option>
+                        <option value="royale-high">Royale High</option>
+                        <option value="tower-defense">Tower Defense</option>
+                        <option value="doors">Doors</option>
+                        <option value="other">Lainnya</option>
+                    </select>
+                    <span class="error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="message"><i class="fas fa-comment"></i> Kenapa ingin join?</label>
+                    <textarea id="message" name="message" rows="3" placeholder="Ceritakan alasanmu..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary submit-btn">
+                    <i class="fas fa-paper-plane"></i> Kirim Pendaftaran
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2><span class="ROBLOX">ROBLOX</span>.CLUB</h2>
+                <p>Komunitas Gaming Premium Indonesia #1</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <a href="#home">Home</a>
+                    <a href="#tentang">Tentang</a>
+                    <a href="#events">Events</a>
+                    <a href="#member">Members</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Games</h4>
+                    <a href="#">Adopt Me!</a>
+                    <a href="#">Blox Fruits</a>
+                    <a href="#">Bloxburg</a>
+                    <a href="#">And More...</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <a href="#"><i class="fas fa-envelope"></i> info@robloxclub.id</a>
+                    <a href="#"><i class="fab fa-discord"></i> Discord</a>
+                    <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="watermak">Copyright &copy; 2024 ROBLOX Club. All rights reserved.</p>
+            <div class="social-media">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
     </footer>
 
-    <script src=""https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js""></script>
+    <!-- Notification Toast -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confettiCanvas"></canvas>
+
     <script src="main.js"></script>
 </body>
+
+</html>
